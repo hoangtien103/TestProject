@@ -1,3 +1,5 @@
+using System.Web.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,6 +22,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action}/{id}",
+    defaults: new {
+        controller = "Home",
+        action="Login",
+        id = UrlParameter.Optional
+    });
 
 app.Run();
